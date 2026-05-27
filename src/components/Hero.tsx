@@ -10,22 +10,7 @@ export function Hero() {
   const scaleImg = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
-  // mouse parallax
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 60, damping: 18 });
-  const sy = useSpring(my, { stiffness: 60, damping: 18 });
 
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const px = (e.clientX / window.innerWidth - 0.5) * 30;
-      const py = (e.clientY / window.innerHeight - 0.5) * 20;
-      mx.set(px);
-      my.set(py);
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [mx, my]);
 
   const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -96,9 +81,9 @@ export function Hero() {
         {/* hero composition */}
         <motion.div
           style={{ y: yImg, scale: scaleImg, opacity }}
-          className="relative mx-auto mt-16 aspect-[16/9] w-full max-w-[1200px] overflow-hidden md:mt-20"
+          className="relative mx-auto mt-12 aspect-[21/9] w-full max-w-[900px] overflow-hidden rounded-3xl md:mt-16"
         >
-          <motion.div style={{ x: sx, y: sy }} className="relative h-full w-full">
+          <div className="relative h-full w-full">
             <img
               src={hero}
               alt="Floating composition of fresh apple, grapes, basil, milk bottle and salmon"
@@ -108,7 +93,7 @@ export function Hero() {
             />
             {/* soft top/bottom fades */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
-          </motion.div>
+          </div>
 
           {/* floating overlay chips */}
           <motion.div

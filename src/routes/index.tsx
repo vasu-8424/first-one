@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { CursorGlow } from "@/components/CursorGlow";
 import { Navbar } from "@/components/Navbar";
@@ -32,7 +33,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="grain relative min-h-screen bg-background text-ink">
+    <div className="grain relative min-h-screen bg-transparent text-ink">
+      <AnimatedBackground />
       <SmoothScroll />
       <CursorGlow />
       <Navbar />

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -13,8 +14,6 @@
     font-display: swap;
   }
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap");
 
 @theme inline {
   --font-display: "Instrument Serif", "Times New Roman", serif;
@@ -99,6 +98,7 @@
 
   html {
     background-color: var(--color-background);
+    scroll-behavior: smooth;
   }
 
   body {
