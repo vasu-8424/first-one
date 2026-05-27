@@ -8,6 +8,7 @@ export function AnimatedBackground() {
 
       {/* Warm ember aura */}
       <motion.div
+        initial={{ scale: 1, x: "0%", y: "0%" }}
         animate={{
           scale: [1, 1.1, 1],
           x: ["0%", "5%", "0%"],
@@ -19,6 +20,7 @@ export function AnimatedBackground() {
       
       {/* Rich jade aura */}
       <motion.div
+        initial={{ scale: 1, x: "0%", y: "0%" }}
         animate={{
           scale: [1, 1.15, 1],
           x: ["0%", "-8%", "0%"],
@@ -30,6 +32,7 @@ export function AnimatedBackground() {
       
       {/* Soft lime aura near bottom */}
       <motion.div
+        initial={{ scale: 1, x: "0%", y: "0%" }}
         animate={{
           scale: [1, 1.2, 1],
           x: ["0%", "10%", "0%"],
