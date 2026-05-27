@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="grain relative min-h-screen bg-transparent text-ink">
+    <div className="relative min-h-screen bg-transparent text-ink">
       <AnimatedBackground />
       <SmoothScroll />
       <CursorGlow />

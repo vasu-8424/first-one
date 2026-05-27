@@ -43,9 +43,10 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-rule: var(--rule);
-  --color-ember: var(--ember);
-  --color-jade: var(--jade);
-  --color-lime: var(--lime);
+  --color-tomato: var(--tomato);
+  --color-carrot: var(--carrot);
+  --color-spinach: var(--spinach);
+  --color-eggplant: var(--eggplant);
 
   --radius-sm: 2px;
   --radius-md: 4px;
@@ -81,10 +82,11 @@
   --input: oklch(0.9 0.008 70);
   --ring: oklch(0.5 0.02 60);
 
-  /* Brand accents — used sparingly */
-  --ember: oklch(0.7 0.2 45);      /* #FF6A00 deep premium orange */
-  --jade: oklch(0.75 0.2 150);     /* #16C95D rich premium green */
-  --lime: oklch(0.92 0.22 125);    /* #B8FF2C soft lime accent */
+  /* Vegetable Palette */
+  --tomato: oklch(0.62 0.22 25);     /* Vibrant red/crimson */
+  --carrot: oklch(0.75 0.2 45);      /* Bright orange */
+  --spinach: oklch(0.55 0.15 145);   /* Deep leafy green */
+  --eggplant: oklch(0.45 0.2 320);   /* Rich purple */
 
   --radius: 0.5rem;
 }

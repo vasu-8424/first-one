@@ -18,8 +18,8 @@ export function Hero() {
     <section ref={ref} id="top" className="relative min-h-screen overflow-hidden pt-28 md:pt-36">
       {/* ambient gradients */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/3 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,oklch(0.92_0.22_125/0.18),transparent_70%)] blur-3xl" />
-        <div className="absolute -bottom-40 right-10 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,oklch(0.7_0.2_45/0.12),transparent_70%)] blur-3xl" />
+        <div className="absolute -top-40 left-1/3 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,oklch(0.55_0.15_145)_0%,transparent_70%)] opacity-[0.2]" />
+        <div className="absolute -bottom-40 right-10 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,oklch(0.62_0.22_25)_0%,transparent_70%)] opacity-[0.15]" />
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
