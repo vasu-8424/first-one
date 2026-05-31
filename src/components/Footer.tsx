@@ -1,3 +1,5 @@
+import logoImg from "@/assets/logo.jpg";
+
 export function Footer() {
   return (
     <footer className="bg-ink pb-10 pt-2 text-background">
@@ -5,11 +7,12 @@ export function Footer() {
         <div className="border-t border-background/10 pt-10">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center gap-2.5">
-                <span className="grid h-7 w-7 place-items-center overflow-hidden rounded-full bg-background">
-                  <span className="font-display text-[15px] leading-none text-ink">a</span>
-                </span>
-                <span className="text-[13px] font-medium tracking-[0.32em]">AERVO</span>
+              <div className="flex items-center gap-3">
+                <img
+                  src={logoImg}
+                  alt="AERVO"
+                  className="h-12 w-auto rounded-xl object-contain shadow-sm"
+                />
               </div>
               <p className="mt-5 max-w-[220px] text-[12px] leading-relaxed text-background/55">
                 The Art of Moving — premium grocery delivery from Makthal &amp; Narayanpet.
