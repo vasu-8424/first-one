@@ -31,11 +31,10 @@ export function CursorGlow() {
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-0 hidden h-[500px] w-[500px] rounded-full opacity-60 mix-blend-multiply md:block"
+      className="pointer-events-none fixed left-0 top-0 z-0 hidden h-[500px] w-[500px] rounded-full opacity-60 md:block will-change-transform"
       style={{
         background:
           "radial-gradient(circle, color-mix(in oklab, var(--ember) 14%, transparent) 0%, transparent 60%)",
-        filter: "blur(40px)",
       }}
     />
   );

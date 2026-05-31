@@ -1,59 +1,87 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { Store, ShoppingBasket, PackageCheck, Truck } from "lucide-react";
 
 const steps = [
-  { n: "01", title: "Curate", body: "Browse the AERVO list — staples, fresh, premium picks." },
-  { n: "02", title: "Confirm", body: "Send your order. We confirm cuts, weights, and arrival window." },
-  { n: "03", title: "Source", body: "Our team selects each item at the morning market." },
-  { n: "04", title: "Deliver", body: "Cold-chain protected, hand-delivered to your door." },
+  {
+    title: "01 / Selection",
+    desc: "Browse our hand-curated catalog of premium groceries, fresh produce, and meats.",
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop",
+  },
+  {
+    title: "02 / The Basket",
+    desc: "Your selections are carefully gathered by our personal shoppers, ensuring only the best quality.",
+    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=600&auto=format&fit=crop",
+  },
+  {
+    title: "03 / Cold Packing",
+    desc: "Items are meticulously packed into temperature-controlled artisan bags to preserve freshness.",
+    image: "https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=600&auto=format&fit=crop",
+  },
+  {
+    title: "04 / Delivery",
+    desc: "Our dedicated fleet navigates straight to your doorstep in Makthal & Narayanpet within 25 minutes.",
+    image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=600&auto=format&fit=crop",
+  },
 ];
 
 export function Process() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+
   return (
-    <section id="process" className="relative bg-canvas py-28 md:py-40">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <div className="mb-16 grid grid-cols-12 gap-6 md:mb-24">
-          <div className="col-span-12 md:col-span-5">
-            <div className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-ink-soft">
-              <span className="h-px w-8 bg-ink-soft/40" />
-              The Movement
-            </div>
-            <h2 className="font-display text-[clamp(2.4rem,5.5vw,5rem)] leading-[0.95] tracking-[-0.03em] text-ink">
-              From shelf to <span className="italic text-ink-soft">your kitchen.</span>
-            </h2>
-          </div>
-          <p className="col-span-12 max-w-md self-end text-[14px] leading-relaxed text-ink-soft md:col-span-4 md:col-start-9">
-            Four quiet steps. Designed to remove every grain of friction between your craving and
-            its arrival.
-          </p>
+    <section ref={targetRef} className="relative h-[250vh] bg-ink text-background">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        
+        {/* Background Ambient (Optimized) */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            style={{ x: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
+            className="absolute -top-40 left-0 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,oklch(0.85_0.2_45/0.1),transparent_60%)] opacity-30 will-change-transform" 
+          />
         </div>
 
-        <div className="relative">
-          <div className="absolute left-0 right-0 top-[88px] hidden h-px bg-ink/10 md:block" />
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-4 md:gap-6">
-            {steps.map((s, i) => (
-              <motion.div
-                key={s.n}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
-                className="relative"
-              >
-                <div className="font-mono text-[10px] tracking-[0.22em] text-ink-soft">{s.n}</div>
-                <div className="relative mt-6 hidden md:block">
-                  <div className="h-3 w-3 rotate-45 bg-background outline outline-1 outline-ink/30" />
-                  <div className="absolute left-1.5 top-1.5 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 bg-ink" />
+        <motion.div style={{ x }} className="relative z-10 flex w-[400vw] h-full items-center will-change-transform">
+          {steps.map((step, index) => (
+            <div key={index} className="flex h-full w-[100vw] flex-col justify-center px-10 md:px-32">
+              <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:items-center md:gap-24">
+                
+                {/* Left: Text */}
+                <div className="max-w-xl">
+                  <div className="mb-8 flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-background/50">
+                    <span className="h-px w-8 bg-background/30" />
+                    The Journey
+                  </div>
+                  <h2 className="font-display text-[clamp(2.5rem,6vw,6rem)] leading-[0.92] tracking-[-0.03em]">
+                    {step.title.split(" / ")[0]} <br />
+                    <span className="italic text-background/70">{step.title.split(" / ")[1]}</span>
+                  </h2>
+                  <p className="mt-6 text-base leading-relaxed text-background/60 md:text-lg">
+                    {step.desc}
+                  </p>
                 </div>
-                <h3 className="mt-6 font-display text-3xl leading-tight tracking-tight text-ink md:mt-10 md:text-4xl">
-                  {s.title}
-                </h3>
-                <p className="mt-3 max-w-[240px] text-[13px] leading-relaxed text-ink-soft">
-                  {s.body}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+
+                {/* Right: Visual */}
+                <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-2 shadow-2xl md:aspect-[4/5]">
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="absolute inset-2 overflow-hidden rounded-[2rem]"
+                  >
+                    <img src={step.image} alt={step.title} loading="lazy" className="h-full w-full object-cover" />
+                  </motion.div>
+                </div>
+
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

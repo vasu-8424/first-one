@@ -1,153 +1,191 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { useRef, useEffect } from "react";
-import hero from "@/assets/hero-groceries.jpg";
 import { MagneticButton } from "./MagneticButton";
+import { useOrderModal } from "@/store/useOrderModal";
+
+const badges = [
+  { label: "Farm Fresh Daily", icon: "🥬" },
+  { label: "Morning Milk", icon: "🥛" },
+  { label: "Fresh Fish", icon: "🐟" },
+  { label: "Premium Meat", icon: "🥩" },
+  { label: "Same Day Delivery", icon: "🚚" },
+];
+
+const floatingItems = [
+  { id: "veg", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=400&auto=format&fit=crop", top: "15%", left: "10%", depth: 40, xDir: -1, yDir: -1 },
+  { id: "milk", img: "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=400&auto=format&fit=crop", top: "60%", left: "12%", depth: 25, xDir: -1, yDir: 1 },
+  { id: "meat", img: "https://images.unsplash.com/photo-1607623814075-e51df1bd682f?q=80&w=400&auto=format&fit=crop", top: "20%", right: "10%", depth: 50, xDir: 1, yDir: -1 },
+  { id: "fish", img: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop", top: "65%", right: "12%", depth: 30, xDir: 1, yDir: 1 },
+];
 
 export function Hero() {
+  const { openModal } = useOrderModal();
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const scaleImg = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const smoothMouseX = useSpring(mouseX, { stiffness: 40, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 40, damping: 20 });
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set((e.clientX / window.innerWidth - 0.5) * 2);
+      mouseY.set((e.clientY / window.innerHeight - 0.5) * 2);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
-  const ease = [0.22, 1, 0.36, 1] as const;
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section ref={ref} id="top" className="relative min-h-screen overflow-hidden pt-28 md:pt-36">
-      {/* ambient gradients */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/3 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,oklch(0.55_0.15_145)_0%,transparent_70%)] opacity-[0.2]" />
-        <div className="absolute -bottom-40 right-10 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,oklch(0.62_0.22_25)_0%,transparent_70%)] opacity-[0.15]" />
+    <section ref={ref} className="relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-[#faf9f8] px-6 pt-32 pb-20">
+      
+      {/* Luxury Ambient Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Jade Glow */}
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "30%"]) }} 
+          className="absolute -top-[10%] left-[10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,oklch(0.85_0.15_150/0.4),transparent_70%)] will-change-transform" 
+        />
+        {/* Warm Orange Glow */}
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "60%"]) }} 
+          className="absolute bottom-[0%] right-[5%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,oklch(0.85_0.15_45/0.3),transparent_70%)] will-change-transform" 
+        />
       </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
-        {/* eyebrow row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease, delay: 0.3 }}
-          className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-ink-soft"
-        >
-          <span className="flex items-center gap-3">
-            <span className="h-px w-8 bg-ink-soft/40" />
-            Est. Makthal · Narayanpet
-          </span>
-          <span className="hidden md:inline">Vol. 01 — The Art of Moving</span>
-        </motion.div>
-
-        {/* headline */}
-        <div className="mt-14 grid grid-cols-12 gap-6 md:mt-20">
-          <div className="col-span-12 md:col-span-8">
-            <h1 className="font-display text-[clamp(3.2rem,11vw,11rem)] leading-[0.92] tracking-[-0.04em] text-ink">
-              {["Freshness", "Delivered", "Beautifully."].map((word, i) => (
-                <motion.span
-                  key={word}
-                  initial={{ y: "110%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 1.1, ease, delay: 0.4 + i * 0.12 }}
-                  className="block overflow-hidden"
-                >
-                  <span className="block">
-                    {word === "Beautifully." ? (
-                      <span className="italic text-ink/90">{word}</span>
-                    ) : (
-                      word
-                    )}
-                  </span>
-                </motion.span>
-              ))}
-            </h1>
-          </div>
-
+      <motion.div
+        style={{ y: textY, opacity }}
+        className="relative z-10 flex w-full max-w-[1400px] flex-col items-center justify-center text-center"
+      >
+        <div className="mb-8 overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease, delay: 0.9 }}
-            className="col-span-12 mt-6 flex flex-col gap-8 md:col-span-4 md:mt-0 md:justify-end"
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-3 rounded-full border border-ink/10 bg-white/40 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-ink-soft shadow-sm backdrop-blur-md"
           >
-            <p className="max-w-sm text-pretty text-[15px] leading-relaxed text-ink-soft">
-              A concierge for the everyday. AERVO curates and delivers your groceries, dairy, meat,
-              fish and produce — arriving at your door with intention.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <MagneticButton>Place Order</MagneticButton>
-              <MagneticButton variant="ghost">Our Services</MagneticButton>
-            </div>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--jade)] opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--jade)]"></span>
+            </span>
+            Premium Delivery in Makthal
           </motion.div>
         </div>
 
-        {/* hero composition */}
-        <motion.div
-          style={{ y: yImg, scale: scaleImg, opacity }}
-          className="relative mx-auto mt-12 aspect-[21/9] w-full max-w-[900px] overflow-hidden rounded-3xl md:mt-16"
+        <h1 className="flex flex-col items-center font-display text-[clamp(3.5rem,8vw,8rem)] leading-[0.9] tracking-[-0.04em] text-ink">
+          <motion.span initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}>
+            Freshness Delivered.
+          </motion.span>
+          <motion.span initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="italic text-ink-soft">
+            Beautifully.
+          </motion.span>
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-xl"
         >
-          <div className="relative h-full w-full">
-            <img
-              src={hero}
-              alt="Floating composition of fresh apple, grapes, basil, milk bottle and salmon"
-              width={1536}
-              height={1536}
-              className="h-full w-full object-cover"
-            />
-            {/* soft top/bottom fades */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
-          </div>
+          Premium groceries, vegetables, milk, fish and meat delivered across Makthal and Narayanpet with unmatched freshness and care.
+        </motion.p>
 
-          {/* floating overlay chips */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease, delay: 1.2 }}
-            className="absolute left-4 top-6 hidden md:left-8 md:top-10 md:block"
-          >
-            <div className="glass hairline flex items-center gap-3 rounded-full px-4 py-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--jade)]" />
-              <span className="text-[11px] uppercase tracking-[0.22em] text-ink">
-                Live · Delivering today
-              </span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease, delay: 1.35 }}
-            className="absolute bottom-6 right-4 hidden md:bottom-10 md:right-8 md:block"
-          >
-            <div className="glass hairline rounded-2xl p-5">
-              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft">
-                Avg. delivery
-              </div>
-              <div className="mt-1 font-display text-4xl leading-none text-ink">42<span className="text-ink-soft">m</span></div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* meta strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="mt-12 grid grid-cols-2 gap-y-6 border-t border-ink/10 pt-6 md:grid-cols-4 md:gap-x-10"
+        {/* Trust Indicators */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-12 flex flex-wrap justify-center gap-3 md:gap-4"
         >
-          {[
-            ["01", "Hand-picked", "Every item inspected before it leaves our hub."],
-            ["02", "Cold chain", "Dairy, meat and fish move under temperature watch."],
-            ["03", "On schedule", "Six days a week, 6 AM to 6 PM."],
-            ["04", "Local craft", "Sourced from Makthal & Narayanpet producers."],
-          ].map(([n, title, body]) => (
-            <div key={n} className="flex items-start gap-3">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-ink-soft">{n}</span>
-              <div>
-                <div className="text-[13px] font-medium text-ink">{title}</div>
-                <p className="mt-1 text-[12px] leading-relaxed text-ink-soft">{body}</p>
-              </div>
+          {badges.map((badge, i) => (
+            <div key={i} className="flex items-center gap-2.5 rounded-2xl border border-ink/5 bg-white/60 px-4 py-2.5 shadow-sm backdrop-blur-lg">
+              <span className="text-lg">{badge.icon}</span>
+              <span className="text-[13px] font-semibold tracking-wide text-ink">{badge.label}</span>
             </div>
           ))}
         </motion.div>
-      </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.7, type: "spring" }}
+          className="mt-14"
+        >
+          <MagneticButton onClick={openModal} className="h-16 bg-ink px-12 text-[14px] font-semibold text-background hover:bg-[oklch(0.7_0.2_150)] shadow-2xl">
+            Begin Your Order
+          </MagneticButton>
+        </motion.div>
+      </motion.div>
+
+      {/* Cinematic Floating Composition & Basket */}
+      <motion.div 
+        style={{ opacity }}
+        className="group relative mt-20 flex w-full max-w-5xl justify-center"
+      >
+        {/* Main Basket Image */}
+        <motion.div 
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 aspect-[16/9] w-full overflow-hidden rounded-[3rem] border-8 border-white/40 shadow-2xl"
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop" 
+            alt="Premium Groceries Basket" 
+            className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
+          {/* Basket Glow on Hover */}
+          <div className="absolute inset-0 bg-[var(--jade)] mix-blend-overlay opacity-0 transition-opacity duration-700 group-hover:opacity-30" />
+        </motion.div>
+
+        {/* Floating Items */}
+        {floatingItems.map((item, i) => {
+          // Calculate parallax and storytelling scroll scatter
+          const clamp = (v: number) => Math.max(0, Math.min(1, v));
+          
+          const scatterX = useTransform(scrollYProgress, [clamp(0), clamp(0.5)], ["0%", `${item.xDir * 150}%`]);
+          const scatterY = useTransform(scrollYProgress, [clamp(0), clamp(0.5)], ["0%", `${item.yDir * 100}%`]);
+          
+          const xMouse = useTransform(smoothMouseX, [-1, 1], [-(item.depth/2), item.depth/2]);
+          const yMouse = useTransform(smoothMouseY, [-1, 1], [-(item.depth/2), item.depth/2]);
+
+          const x = useTransform(() => `calc(${scatterX.get()} + ${xMouse.get()}px)`);
+          const y = useTransform(() => `calc(${scatterY.get()} + ${yMouse.get()}px)`);
+
+          return (
+            <motion.div
+              key={item.id}
+              style={{ top: item.top, left: item.left, right: item.right, x, y }}
+              className="absolute z-20 hidden md:block will-change-transform"
+            >
+              <motion.div
+                animate={{ 
+                  y: ["-5%", "5%"],
+                  rotate: [-5, 5]
+                }}
+                transition={{
+                  duration: 4 + i,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut"
+                }}
+                className="h-28 w-28 overflow-hidden rounded-full border-4 border-white bg-white/50 shadow-2xl backdrop-blur-sm transition-transform duration-700 group-hover:scale-90 group-hover:opacity-40"
+              >
+                <img src={item.img} alt="Produce" loading="lazy" className="h-full w-full object-cover" />
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
     </section>
   );
 }

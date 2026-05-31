@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { MagneticButton } from "./MagneticButton";
+import { useOrderModal } from "@/store/useOrderModal";
 
 export function Contact() {
+  const { openModal } = useOrderModal();
+  
   return (
     <section id="contact" className="relative bg-ink py-28 text-background md:py-40">
       {/* ambient */}
@@ -31,7 +34,7 @@ export function Contact() {
               Call, message, or write to us. Orders confirmed within minutes during service hours.
             </p>
             <div className="mt-10">
-              <MagneticButton className="bg-background text-ink hover:bg-background/90">
+              <MagneticButton onClick={openModal} className="bg-background text-ink hover:bg-background/90">
                 Start an order
               </MagneticButton>
             </div>
