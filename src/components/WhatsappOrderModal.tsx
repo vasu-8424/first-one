@@ -35,7 +35,7 @@ export function WhatsappOrderModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-      <DialogContent className="glass hairline fixed bottom-0 left-[50%] z-50 flex w-full max-w-lg translate-x-[-50%] translate-y-0 flex-col gap-0 overflow-hidden rounded-t-3xl border-ink/10 bg-background/90 p-0 shadow-2xl backdrop-blur-2xl duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom sm:bottom-auto sm:top-[50%] sm:max-h-[85vh] sm:translate-y-[-50%] sm:rounded-3xl">
+      <DialogContent className="glass hairline fixed bottom-0 left-[50%] z-50 flex max-h-[90dvh] w-full max-w-lg translate-x-[-50%] translate-y-0 flex-col gap-0 overflow-hidden rounded-t-3xl border-ink/10 bg-background/90 p-0 shadow-2xl backdrop-blur-2xl duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom sm:bottom-auto sm:top-[50%] sm:max-h-[85vh] sm:translate-y-[-50%] sm:rounded-3xl">
         <div className="shrink-0 border-b border-ink/5 p-6 pb-4">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl text-ink">
