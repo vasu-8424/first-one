@@ -106,7 +106,7 @@ Please confirm my order.`;
       )}
 
       <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
               Name *
@@ -133,7 +133,7 @@ Please confirm my order.`;
           </div>
         </div>
 
-        <div className="grid grid-cols-[2fr_1fr] gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4">
           <div className="space-y-1">
             <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
               Products Required *
