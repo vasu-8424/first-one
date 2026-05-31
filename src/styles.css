@@ -8,7 +8,8 @@
 @layer base {
   @font-face {
     font-family: "Aervo Display";
-    src: url("https://fonts.gstatic.com/s/instrumentserif/v6/jizDREVItHgc8qDIbSTKq4XkRiUa6zUTiw.woff2") format("woff2");
+    src: url("https://fonts.gstatic.com/s/instrumentserif/v6/jizDREVItHgc8qDIbSTKq4XkRiUa6zUTiw.woff2")
+      format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -83,10 +84,10 @@
   --ring: oklch(0.5 0.02 60);
 
   /* Vegetable Palette */
-  --tomato: oklch(0.62 0.22 25);     /* Vibrant red/crimson */
-  --carrot: oklch(0.75 0.2 45);      /* Bright orange */
-  --spinach: oklch(0.55 0.15 145);   /* Deep leafy green */
-  --eggplant: oklch(0.45 0.2 320);   /* Rich purple */
+  --tomato: oklch(0.62 0.22 25); /* Vibrant red/crimson */
+  --carrot: oklch(0.75 0.2 45); /* Bright orange */
+  --spinach: oklch(0.55 0.15 145); /* Deep leafy green */
+  --eggplant: oklch(0.45 0.2 320); /* Rich purple */
 
   --radius: 0.5rem;
 }
@@ -150,25 +151,44 @@
     border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
   }
 
-  .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
   @keyframes aervo-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
   .animate-marquee {
     animation: aervo-marquee 40s linear infinite;
   }
 
   @keyframes aervo-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
   }
-  .animate-float { animation: aervo-float 7s ease-in-out infinite; }
+  .animate-float {
+    animation: aervo-float 7s ease-in-out infinite;
+  }
 
   @keyframes aervo-shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 }

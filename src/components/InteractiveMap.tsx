@@ -39,7 +39,7 @@ export function InteractiveMap({ lat, lng, onChange }: Props) {
         }
       },
     }),
-    [onChange]
+    [onChange],
   );
 
   return (
@@ -62,7 +62,7 @@ export function InteractiveMap({ lat, lng, onChange }: Props) {
         />
         <MapUpdater lat={lat} lng={lng} />
       </MapContainer>
-      
+
       {/* Overlay instructions */}
       <div className="pointer-events-none absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full bg-ink/90 px-3 py-1.5 text-[10px] uppercase tracking-wider text-background shadow-md backdrop-blur-md">
         <span>Drag marker to adjust</span>

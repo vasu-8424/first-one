@@ -10,7 +10,9 @@ import { MapPin, Target, Loader2, Home, Briefcase, Map } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Dynamically import InteractiveMap to prevent Leaflet from crashing during SSR
-const InteractiveMap = lazy(() => import("./InteractiveMap").then(m => ({ default: m.InteractiveMap })));
+const InteractiveMap = lazy(() =>
+  import("./InteractiveMap").then((m) => ({ default: m.InteractiveMap })),
+);
 
 const addressSchema = z.object({
   houseFlatNo: z.string().min(1, "House/Flat No is required"),
@@ -62,7 +64,7 @@ export function AddressFormStep() {
     setLoadingLoc(true);
     try {
       const res = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
       );
       const data = await res.json();
       const addr = data.address || {};
@@ -78,7 +80,7 @@ export function AddressFormStep() {
       const isCovered =
         JSON.stringify(addr).toLowerCase().includes("makthal") ||
         JSON.stringify(addr).toLowerCase().includes("narayanpet");
-      
+
       setCoverage(isCovered ? "available" : "unavailable");
     } catch (e) {
       console.error(e);
@@ -96,7 +98,7 @@ export function AddressFormStep() {
         setTempLocation({ lat: latitude, lng: longitude });
         reverseGeocode(latitude, longitude);
       },
-      () => setLoadingLoc(false)
+      () => setLoadingLoc(false),
     );
   };
 
@@ -135,7 +137,11 @@ export function AddressFormStep() {
           className="absolute bottom-4 right-4 z-10 gap-2 shadow-lg"
           disabled={loadingLoc}
         >
-          {loadingLoc ? <Loader2 className="h-4 w-4 animate-spin" /> : <Target className="h-4 w-4" />}
+          {loadingLoc ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Target className="h-4 w-4" />
+          )}
           Locate Me
         </Button>
       </div>
@@ -146,7 +152,7 @@ export function AddressFormStep() {
             "rounded-lg border p-3 text-center text-[13px] font-medium",
             coverage === "available"
               ? "border-[var(--jade)]/20 bg-[var(--jade)]/10 text-[var(--jade)]"
-              : "border-red-500/20 bg-red-500/10 text-red-600"
+              : "border-red-500/20 bg-red-500/10 text-red-600",
           )}
         >
           {coverage === "available" ? "✅ Delivery Available" : "⚠ Outside Service Area"}
@@ -156,44 +162,92 @@ export function AddressFormStep() {
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">House / Flat No *</Label>
-            <Input {...register("houseFlatNo")} placeholder="e.g. 102" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.houseFlatNo && <span className="text-[10px] text-red-500">{errors.houseFlatNo.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              House / Flat No *
+            </Label>
+            <Input
+              {...register("houseFlatNo")}
+              placeholder="e.g. 102"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.houseFlatNo && (
+              <span className="text-[10px] text-red-500">{errors.houseFlatNo.message}</span>
+            )}
           </div>
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Building Name</Label>
-            <Input {...register("buildingName")} placeholder="e.g. Residency" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Building Name
+            </Label>
+            <Input
+              {...register("buildingName")}
+              placeholder="e.g. Residency"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Street / Road *</Label>
-            <Input {...register("street")} placeholder="e.g. Main Road" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.street && <span className="text-[10px] text-red-500">{errors.street.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Street / Road *
+            </Label>
+            <Input
+              {...register("street")}
+              placeholder="e.g. Main Road"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.street && (
+              <span className="text-[10px] text-red-500">{errors.street.message}</span>
+            )}
           </div>
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Area / Colony *</Label>
-            <Input {...register("area")} placeholder="e.g. Old City" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Area / Colony *
+            </Label>
+            <Input
+              {...register("area")}
+              placeholder="e.g. Old City"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
             {errors.area && <span className="text-[10px] text-red-500">{errors.area.message}</span>}
           </div>
         </div>
 
         <div className="space-y-1">
-          <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Landmark</Label>
-          <Input {...register("landmark")} placeholder="e.g. Near Post Office" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
+          <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+            Landmark
+          </Label>
+          <Input
+            {...register("landmark")}
+            placeholder="e.g. Near Post Office"
+            className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Village / Town *</Label>
-            <Input {...register("villageTown")} className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.villageTown && <span className="text-[10px] text-red-500">{errors.villageTown.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Village / Town *
+            </Label>
+            <Input
+              {...register("villageTown")}
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.villageTown && (
+              <span className="text-[10px] text-red-500">{errors.villageTown.message}</span>
+            )}
           </div>
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Pincode *</Label>
-            <Input {...register("pincode")} className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.pincode && <span className="text-[10px] text-red-500">{errors.pincode.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Pincode *
+            </Label>
+            <Input
+              {...register("pincode")}
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.pincode && (
+              <span className="text-[10px] text-red-500">{errors.pincode.message}</span>
+            )}
           </div>
         </div>
 
@@ -218,7 +272,7 @@ export function AddressFormStep() {
                   "flex flex-1 items-center justify-center gap-2 rounded-lg border py-2.5 text-xs font-medium transition-all",
                   addressType === t.id
                     ? "border-[var(--jade)] bg-[var(--jade)]/10 text-[var(--jade)]"
-                    : "border-ink/10 text-ink-soft hover:bg-ink/5"
+                    : "border-ink/10 text-ink-soft hover:bg-ink/5",
                 )}
               >
                 <t.icon className="h-3.5 w-3.5" />
@@ -238,7 +292,10 @@ export function AddressFormStep() {
         >
           Back
         </Button>
-        <Button type="submit" className="flex-[2] rounded-xl bg-[var(--jade)] hover:bg-[oklch(0.7_0.2_150)] text-white">
+        <Button
+          type="submit"
+          className="flex-[2] rounded-xl bg-[var(--jade)] hover:bg-[oklch(0.7_0.2_150)] text-white"
+        >
           Save & Continue
         </Button>
       </div>

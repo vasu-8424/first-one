@@ -90,7 +90,9 @@ export function CoverageMap() {
               </div>
               <div className="absolute left-1/2 mt-4 -translate-x-1/2 whitespace-nowrap text-center">
                 <p className="font-display text-xl text-white">Narayanpet</p>
-                <p className="text-[10px] uppercase tracking-widest text-background/50">Delivery Zone</p>
+                <p className="text-[10px] uppercase tracking-widest text-background/50">
+                  Delivery Zone
+                </p>
               </div>
             </div>
           </div>

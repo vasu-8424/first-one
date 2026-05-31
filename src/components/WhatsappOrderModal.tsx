@@ -19,7 +19,8 @@ const variants = {
 };
 
 export function WhatsappOrderModal() {
-  const { isOpen, step, savedAddresses, setStep, setSelectedAddress, setTempLocation, closeModal } = useOrderModal();
+  const { isOpen, step, savedAddresses, setStep, setSelectedAddress, setTempLocation, closeModal } =
+    useOrderModal();
 
   const handleAddNew = () => {
     setTempLocation(null);
@@ -35,7 +36,6 @@ export function WhatsappOrderModal() {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
       <DialogContent className="glass hairline fixed bottom-0 left-[50%] z-50 flex w-full max-w-lg translate-x-[-50%] translate-y-0 flex-col gap-0 overflow-hidden rounded-t-3xl border-ink/10 bg-background/90 p-0 shadow-2xl backdrop-blur-2xl duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom sm:bottom-auto sm:top-[50%] sm:max-h-[85vh] sm:translate-y-[-50%] sm:rounded-3xl">
-        
         <div className="shrink-0 border-b border-ink/5 p-6 pb-4">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl text-ink">
@@ -71,7 +71,9 @@ export function WhatsappOrderModal() {
                     <Navigation className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-semibold text-[var(--jade)]">Use Current Location</h4>
+                    <h4 className="text-sm font-semibold text-[var(--jade)]">
+                      Use Current Location
+                    </h4>
                     <p className="text-xs text-ink-soft">Using GPS</p>
                   </div>
                   <ChevronRight className="h-4 w-4 text-[var(--jade)]" />
@@ -79,7 +81,9 @@ export function WhatsappOrderModal() {
 
                 <div className="my-2 flex items-center gap-4">
                   <div className="h-px flex-1 bg-ink/10" />
-                  <span className="text-[10px] uppercase tracking-wider text-ink-soft">Saved Addresses</span>
+                  <span className="text-[10px] uppercase tracking-wider text-ink-soft">
+                    Saved Addresses
+                  </span>
                   <div className="h-px flex-1 bg-ink/10" />
                 </div>
 
@@ -92,7 +96,13 @@ export function WhatsappOrderModal() {
                         className="flex w-full items-start gap-4 rounded-xl border border-ink/10 bg-white/40 p-4 text-left transition-all hover:bg-white/80"
                       >
                         <div className="mt-0.5 text-ink-soft">
-                          {addr.type === "Home" ? <Home className="h-5 w-5" /> : addr.type === "Work" ? <Briefcase className="h-5 w-5" /> : <MapPin className="h-5 w-5" />}
+                          {addr.type === "Home" ? (
+                            <Home className="h-5 w-5" />
+                          ) : addr.type === "Work" ? (
+                            <Briefcase className="h-5 w-5" />
+                          ) : (
+                            <MapPin className="h-5 w-5" />
+                          )}
                         </div>
                         <div className="flex-1">
                           <h4 className="text-sm font-semibold text-ink">{addr.type}</h4>
@@ -109,9 +119,13 @@ export function WhatsappOrderModal() {
                     <p className="text-sm">No saved addresses</p>
                   </div>
                 )}
-                
+
                 {savedAddresses.length > 0 && (
-                  <Button onClick={handleAddNew} variant="outline" className="mt-2 w-full rounded-xl border-dashed">
+                  <Button
+                    onClick={handleAddNew}
+                    variant="outline"
+                    className="mt-2 w-full rounded-xl border-dashed"
+                  >
                     <Plus className="mr-2 h-4 w-4" /> Add New Address
                   </Button>
                 )}

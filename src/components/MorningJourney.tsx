@@ -37,7 +37,7 @@ const journeySteps = [
 
 export function MorningJourney() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -46,16 +46,15 @@ export function MorningJourney() {
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-background">
       <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden">
-        
         {/* Background color shifting */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0"
           style={{
             backgroundColor: useTransform(
               scrollYProgress,
               [0, 0.2, 0.4, 0.6, 0.8, 1],
-              ["#f8f9fa", "#fff7ed", "#f0fdf4", "#eff6ff", "#f8fafc", "#f8f9fa"]
-            )
+              ["#f8f9fa", "#fff7ed", "#f0fdf4", "#eff6ff", "#f8fafc", "#f8f9fa"],
+            ),
           }}
         />
 
@@ -78,19 +77,19 @@ export function MorningJourney() {
               const opacity = useTransform(
                 scrollYProgress,
                 [clamp(start - 0.05), clamp(peak), clamp(end + 0.05)],
-                [0, 1, 0]
+                [0, 1, 0],
               );
 
               const y = useTransform(
                 scrollYProgress,
                 [clamp(start - 0.1), clamp(peak), clamp(end + 0.1)],
-                [50, 0, -50]
+                [50, 0, -50],
               );
 
               const scale = useTransform(
                 scrollYProgress,
                 [clamp(start - 0.1), clamp(peak), clamp(end + 0.1)],
-                [0.9, 1, 1.1]
+                [0.9, 1, 1.1],
               );
 
               return (
@@ -126,13 +125,13 @@ export function MorningJourney() {
                   width: useTransform(
                     scrollYProgress,
                     [clamp(i * 0.2 - 0.1), clamp(i * 0.2 + 0.1)],
-                    [8, 32]
+                    [8, 32],
                   ),
                   opacity: useTransform(
                     scrollYProgress,
                     [clamp(i * 0.2 - 0.1), clamp(i * 0.2 + 0.1)],
-                    [0.2, 1]
-                  )
+                    [0.2, 1],
+                  ),
                 }}
               />
             );

@@ -6,7 +6,8 @@ const services = [
     id: "vegetables",
     title: "Fresh Produce",
     desc: "Sourced directly from local farms daily. Hand-picked for crispness and flavor.",
-    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800&auto=format&fit=crop",
     colSpan: "md:col-span-8",
     rowSpan: "md:row-span-2",
   },
@@ -14,7 +15,8 @@ const services = [
     id: "milk",
     title: "Morning Dairy",
     desc: "Cold-chain protected pure milk.",
-    image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1563636619-e9143da7973b?q=80&w=800&auto=format&fit=crop",
     colSpan: "md:col-span-4",
     rowSpan: "md:row-span-1",
   },
@@ -22,7 +24,8 @@ const services = [
     id: "grocery",
     title: "Pantry Essentials",
     desc: "Premium brands and household needs delivered in minutes.",
-    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=800&auto=format&fit=crop",
     colSpan: "md:col-span-4",
     rowSpan: "md:row-span-2",
   },
@@ -30,7 +33,8 @@ const services = [
     id: "meat",
     title: "Premium Cuts",
     desc: "Hygienically packed fresh meat.",
-    image: "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800&auto=format&fit=crop",
     colSpan: "md:col-span-4",
     rowSpan: "md:row-span-1",
   },
@@ -38,7 +42,8 @@ const services = [
     id: "fish",
     title: "Fresh Seafood",
     desc: "Daily catch from trusted sources.",
-    image: "https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?q=80&w=800&auto=format&fit=crop",
     colSpan: "md:col-span-4",
     rowSpan: "md:row-span-1",
   },
@@ -60,7 +65,8 @@ export function Services() {
             </h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
-            Explore our meticulously maintained catalog of daily essentials, cold-stored and delivered perfectly.
+            Explore our meticulously maintained catalog of daily essentials, cold-stored and
+            delivered perfectly.
           </p>
         </div>
 
@@ -78,9 +84,9 @@ export function Services() {
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
+                <img
+                  src={service.image}
+                  alt={service.title}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Dark Gradient Overlay for text contrast */}
@@ -89,7 +95,7 @@ export function Services() {
 
               <div className="relative z-10 flex h-full flex-col justify-between p-8">
                 <div className="flex w-full items-start justify-end">
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, rotate: -45 }}
                     whileHover={{ opacity: 1, rotate: 0 }}
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md transition-all group-hover:opacity-100 group-hover:bg-white text-white group-hover:text-ink"

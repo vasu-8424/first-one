@@ -32,11 +32,17 @@ export function Navbar() {
       <nav
         className={cn(
           "pointer-events-auto flex w-full max-w-6xl items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500 md:px-7 md:py-3",
-          scrolled ? "glass hairline shadow-[0_8px_40px_-12px_rgba(20,15,10,0.08)]" : "bg-transparent"
+          scrolled
+            ? "glass hairline shadow-[0_8px_40px_-12px_rgba(20,15,10,0.08)]"
+            : "bg-transparent",
         )}
       >
         <a href="#top" className="flex items-center">
-          <img src={logoImg} alt="AERVO" className="h-16 w-auto rounded-xl object-contain shadow-sm md:h-20" />
+          <img
+            src={logoImg}
+            alt="AERVO"
+            className="h-16 w-auto rounded-xl object-contain shadow-sm md:h-20"
+          />
         </a>
 
         <ul className="hidden items-center gap-9 md:flex">
@@ -54,7 +60,10 @@ export function Navbar() {
         </ul>
 
         <button
-          onClick={(e) => { e.preventDefault(); openModal(); }}
+          onClick={(e) => {
+            e.preventDefault();
+            openModal();
+          }}
           className="group flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-background transition-all hover:bg-ink/90 cursor-pointer md:px-5"
         >
           <span className="relative flex h-1.5 w-1.5">

@@ -50,7 +50,7 @@ export const useOrderModal = create<OrderModalState>()(
       setStep: (step) => set({ step }),
       setTempLocation: (tempLocation) => set({ tempLocation }),
       setSelectedAddress: (selectedAddress) => set({ selectedAddress }),
-      
+
       saveAddress: (address) =>
         set((state) => {
           const exists = state.savedAddresses.findIndex((a) => a.id === address.id);
@@ -64,7 +64,7 @@ export const useOrderModal = create<OrderModalState>()(
             selectedAddress: address,
           };
         }),
-        
+
       removeAddress: (id) =>
         set((state) => ({
           savedAddresses: state.savedAddresses.filter((a) => a.id !== id),
@@ -74,6 +74,6 @@ export const useOrderModal = create<OrderModalState>()(
     {
       name: "aervo-address-storage",
       partialize: (state) => ({ savedAddresses: state.savedAddresses }), // Only persist addresses
-    }
-  )
+    },
+  ),
 );

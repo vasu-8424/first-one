@@ -71,7 +71,7 @@ Please confirm my order.`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/919963791004?text=${encodedMessage}`;
-    
+
     window.open(whatsappUrl, "_blank");
     closeModal();
   };
@@ -88,7 +88,8 @@ Please confirm my order.`;
             <div>
               <p className="text-sm font-semibold text-ink">Delivering to {selectedAddress.type}</p>
               <p className="mt-1 line-clamp-1 text-xs text-ink-soft">
-                {selectedAddress.houseFlatNo}, {selectedAddress.street}, {selectedAddress.villageTown}
+                {selectedAddress.houseFlatNo}, {selectedAddress.street},{" "}
+                {selectedAddress.villageTown}
               </p>
             </div>
           </div>
@@ -107,32 +108,64 @@ Please confirm my order.`;
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Name *</Label>
-            <Input {...register("name")} placeholder="John Doe" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Name *
+            </Label>
+            <Input
+              {...register("name")}
+              placeholder="John Doe"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
             {errors.name && <span className="text-[10px] text-red-500">{errors.name.message}</span>}
           </div>
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Phone Number *</Label>
-            <Input {...register("phone")} placeholder="98765 43210" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.phone && <span className="text-[10px] text-red-500">{errors.phone.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Phone Number *
+            </Label>
+            <Input
+              {...register("phone")}
+              placeholder="98765 43210"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.phone && (
+              <span className="text-[10px] text-red-500">{errors.phone.message}</span>
+            )}
           </div>
         </div>
 
         <div className="grid grid-cols-[2fr_1fr] gap-4">
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Products Required *</Label>
-            <Input {...register("products")} placeholder="e.g. Milk, Apples" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.products && <span className="text-[10px] text-red-500">{errors.products.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Products Required *
+            </Label>
+            <Input
+              {...register("products")}
+              placeholder="e.g. Milk, Apples"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.products && (
+              <span className="text-[10px] text-red-500">{errors.products.message}</span>
+            )}
           </div>
           <div className="space-y-1">
-            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Quantity *</Label>
-            <Input {...register("quantity")} placeholder="e.g. 2L, 1kg" className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]" />
-            {errors.quantity && <span className="text-[10px] text-red-500">{errors.quantity.message}</span>}
+            <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+              Quantity *
+            </Label>
+            <Input
+              {...register("quantity")}
+              placeholder="e.g. 2L, 1kg"
+              className="h-11 rounded-xl border-ink/20 bg-white/50 px-4 text-ink transition-all focus-visible:border-[var(--jade)] focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-[var(--jade)]"
+            />
+            {errors.quantity && (
+              <span className="text-[10px] text-red-500">{errors.quantity.message}</span>
+            )}
           </div>
         </div>
 
         <div className="space-y-1">
-          <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">Delivery Instructions (Optional)</Label>
+          <Label className="text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+            Delivery Instructions (Optional)
+          </Label>
           <Textarea
             {...register("notes")}
             placeholder="e.g. Leave at the front door, ring doorbell..."

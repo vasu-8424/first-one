@@ -61,7 +61,7 @@ export function Testimonials() {
             >
               <Quote className="mb-6 h-8 w-8 text-ink/10" />
               <p className="text-lg leading-relaxed text-ink md:text-xl">"{t.text}"</p>
-              
+
               <div className="mt-8 flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-ink/5 text-ink font-display text-xl">
                   {t.author.charAt(0)}
