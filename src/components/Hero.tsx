@@ -12,10 +12,10 @@ const badges = [
 ];
 
 const floatingItems = [
-  { id: "veg", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=400&auto=format&fit=crop", top: "15%", left: "10%", depth: 40, xDir: -1, yDir: -1 },
-  { id: "milk", img: "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=400&auto=format&fit=crop", top: "60%", left: "12%", depth: 25, xDir: -1, yDir: 1 },
+  { id: "veg",    img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=60&w=400&auto=format&fit=crop", top: "15%", left: "10%", depth: 40, xDir: -1, yDir: -1 },
+  { id: "milk",    img: "https://images.unsplash.com/photo-1628085408616-08115682b13b?q=60&w=400&auto=format&fit=crop", top: "60%", left: "12%", depth: 25, xDir: -1, yDir: 1 },
   { id: "meat", img: "https://images.unsplash.com/photo-1607623814075-e51df1bd682f?q=80&w=400&auto=format&fit=crop", top: "20%", right: "10%", depth: 50, xDir: 1, yDir: -1 },
-  { id: "fish", img: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop", top: "65%", right: "12%", depth: 30, xDir: 1, yDir: 1 },
+  { id: "fish",    img: "https://images.unsplash.com/photo-1603048297172-c92544798d5e?q=60&w=400&auto=format&fit=crop", top: "65%", right: "12%", depth: 30, xDir: 1, yDir: 1 },
 ];
 
 export function Hero() {
@@ -178,9 +178,9 @@ export function Hero() {
                   repeatType: "mirror",
                   ease: "easeInOut"
                 }}
-                className="h-28 w-28 overflow-hidden rounded-full border-4 border-white bg-white/50 shadow-2xl backdrop-blur-sm transition-transform duration-700 group-hover:scale-90 group-hover:opacity-40"
+                className="h-28 w-28 overflow-hidden rounded-full border-4 border-white bg-white/50 shadow-2xl transition-transform duration-700 group-hover:scale-90 group-hover:opacity-40 will-change-transform"
               >
-                <img src={item.img} alt="Produce" loading="lazy" className="h-full w-full object-cover" />
+                <img src={item.img} alt="Produce" loading="lazy" className="h-full w-full object-cover rounded-full" />
               </motion.div>
             </motion.div>
           );

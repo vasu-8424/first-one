@@ -6,22 +6,22 @@ const steps = [
   {
     title: "01 / Selection",
     desc: "Browse our hand-curated catalog of premium groceries, fresh produce, and meats.",
-    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=60&w=400&auto=format&fit=crop",
   },
   {
     title: "02 / The Basket",
     desc: "Your selections are carefully gathered by our personal shoppers, ensuring only the best quality.",
-    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=60&w=400&auto=format&fit=crop",
   },
   {
     title: "03 / Cold Packing",
     desc: "Items are meticulously packed into temperature-controlled artisan bags to preserve freshness.",
-    image: "https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1601598851547-4302969d0614?q=60&w=400&auto=format&fit=crop",
   },
   {
     title: "04 / Delivery",
     desc: "Our dedicated fleet navigates straight to your doorstep in Makthal & Narayanpet within 25 minutes.",
-    image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=60&w=400&auto=format&fit=crop",
   },
 ];
 
